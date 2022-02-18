@@ -295,7 +295,7 @@ namespace algebra
     {
         size_t n{matrix.size()};
         size_t m{matrix[0].size()};
-        if (r1 >= n || r2 >= n)
+        if (r1 >= n || r2 >= n || r1 < 0 || r2 < 0)
             throw std::logic_error("r1 or r2 inputs are out of range!");
         Matrix mat{matrix};
         for (size_t j{}; j < m; j++)
@@ -310,7 +310,7 @@ namespace algebra
     {
         size_t n{matrix.size()};
         size_t m{matrix[0].size()};
-        if (r >= n)
+        if (r >= n || r < 0)
             throw std::logic_error("r input is out of range!");
         Matrix mat{matrix};
         for (size_t j{}; j < m; j++)
@@ -322,7 +322,10 @@ namespace algebra
 
     Matrix ero_sum(const Matrix &matrix, size_t r1, double c, size_t r2)
     {
+        size_t n{matrix.size()};
         size_t m{matrix[0].size()};
+        if (r1 >= n || r2 >= n || r1 < 0 || r2 < 0)
+            throw std::logic_error("r1 or r2 inputs are out of range!");
         Matrix mat{matrix};
         for (size_t j{}; j < m; j++)
         {
