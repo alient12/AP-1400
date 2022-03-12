@@ -26,3 +26,11 @@ std::string Client::sign(std::string txt) const
     bool authentic = crypto::verifySignature(public_key, txt, signature);
     return signature;
 }
+
+bool Client::transfer_money(std::string receiver, double value)
+{
+    std::string trx{id + '-' + receiver + '-' + std::to_string(value)};
+    std::string signature{sign(trx)};
+    bool valid {server->add_pending_trx(trx, signature)};
+    return valid;
+}

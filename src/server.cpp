@@ -1,5 +1,7 @@
 #include "server.h"
 
+std::vector<std::string> pending_trxs{};
+
 Server::Server()
 {
     return;
@@ -74,6 +76,27 @@ bool Server::parse_trx(std::string trx, std::string& sender, std::string& receiv
     receiver = trx.substr(inx0 + 1, inx1 - inx0 - 1);
     value = std::stod(trx.substr(inx1 + 1));
     return true;
+}
+
+bool Server::add_pending_trx(std::string trx, std::string signature) const
+{
+    std::string sender{}, receiver{};
+    double value;
+    parse_trx(trx, sender, receiver, value);
+    
+    // check if receiver exists
+    if (get_client(receiver) == nullptr) return false;
+    
+    double wallet{get_wallet(sender)};
+    std::string signature_check{get_client(sender)->sign(trx)};
+
+    // check wallet and signature
+    if (wallet >= value && signature_check == signature)
+    {
+        pending_trxs.push_back(trx);
+        return true;
+    }
+    return false;
 }
 
 void show_wallets(const Server& server)
