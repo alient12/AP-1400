@@ -4,6 +4,13 @@
 #include "client.h"
 #include "server.h"
 
+void  show_pending_transactions()
+{
+    std::cout  <<  std::string(20, '*') <<  std::endl;
+ 	for(const  auto& trx : pending_trxs)
+ 		std::cout << trx <<  std::endl;
+ 	std::cout  <<  std::string(20, '*') <<  std::endl;
+}
 
 int main(int argc, char **argv)
 {
@@ -11,7 +18,13 @@ int main(int argc, char **argv)
     {
         // debug section
         Server server{};
-        std::cout << "Hello";
+        auto bryan{server.add_client("bryan")};
+        auto clint{server.add_client("clint")};
+        auto sarah{server.add_client("sarah")};
+        bryan->transfer_money("clint", 1);
+        clint->transfer_money("sarah", 2.5);
+        sarah->transfer_money("bryan", 0.5);
+        show_pending_transactions();
     }
     else
     {
