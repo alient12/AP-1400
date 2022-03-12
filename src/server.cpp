@@ -63,9 +63,18 @@ double Server::get_wallet(std::string id) const
 
 bool Server::parse_trx(std::string trx, std::string& sender, std::string& receiver, double& value)
 {
-
+    // parse trx
+    auto inx0{trx.find('-')};
+    if (inx0 == std::string::npos)
+        throw std::runtime_error("Not a standard transaction");
+    auto inx1{trx.rfind('-')};
+    if (inx0 == inx1)
+        throw std::runtime_error("Not a standard transaction");
+    sender = trx.substr(0, inx0);
+    receiver = trx.substr(inx0 + 1, inx1 - inx0 - 1);
+    value = std::stod(trx.substr(inx1 + 1));
+    return true;
 }
-
 
 void show_wallets(const Server& server)
 {
