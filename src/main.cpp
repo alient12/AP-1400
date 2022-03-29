@@ -9,7 +9,7 @@ int main(int argc, char **argv)
         // debug section
         BST::Node node{};
         node.value = 10;
-        std::cout << (node.value == 10) << std::endl;
+        std::cout << node << std::endl;
     }
     else
     {

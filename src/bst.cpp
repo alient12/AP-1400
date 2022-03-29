@@ -30,3 +30,11 @@ std::partial_ordering operator<=>(const int num, const BST::Node& node)
 {
     return node.value <=> num;
 }
+
+std::ostream& operator<<(std::ostream& os, const BST::Node& node)
+{
+    os << &node << std::setw(20) << "=> value:" << node.value;
+    os << std::setw(20) << "left:" << node.left;
+    os << std::setw(20) << "right:" << node.right;
+    return os;
+}
