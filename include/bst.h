@@ -3,6 +3,7 @@
 
 #include <functional>
 #include <iostream>
+#include <compare>
 
 class BST
 {
@@ -13,6 +14,8 @@ public:
         Node(int value, Node* left, Node* right);
         Node();
         Node(const Node& node);
+        std::partial_ordering operator<=>(int num) const;
+        friend std::partial_ordering operator<=>(const int num, const Node& node);
 
         int value;
         Node* left;

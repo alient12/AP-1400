@@ -7,7 +7,9 @@ int main(int argc, char **argv)
     if (true) // make false to run unit-tests
     {
         // debug section
-
+        BST::Node node{};
+        node.value = 10;
+        std::cout << (node.value == 10) << std::endl;
     }
     else
     {
