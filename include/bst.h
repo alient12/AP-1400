@@ -5,6 +5,7 @@
 #include <iostream>
 #include <compare>
 #include <iomanip>
+#include <string>
 
 class BST
 {
@@ -36,6 +37,7 @@ public:
     Node** find_parrent(int value);
     Node** find_successor(int value);
     bool delete_node(int value);
+    friend std::ostream &operator<<(std::ostream &os, BST &bst);
 
 private:
     Node* root;

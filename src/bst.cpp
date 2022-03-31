@@ -43,9 +43,10 @@ bool operator==(const int num, const BST::Node& node)
 
 std::ostream& operator<<(std::ostream& os, const BST::Node& node)
 {
-    os << &node << std::setw(20) << "=> value:" << node.value;
-    os << std::setw(20) << "left:" << node.left;
-    os << std::setw(20) << "right:" << node.right;
+    os << &node;
+    os << std::right << std::setfill(' ') << std::setw(17) << "=> value:" << std::left << std::setfill(' ') << std::setw(10) << (node.value);
+    os << "left:" << std::left << std::setfill(' ') << std::setw(16) << node.left;
+    os << "right:"  << std::left << std::setfill(' ') << std::setw(16) << node.right;
     return os;
 }
 
@@ -237,4 +238,30 @@ BST::Node** BST::find_successor(int value)
         else
             return &node;
     }
+}
+
+std::ostream& operator<<(std::ostream& os, BST& bst)
+{
+    std::function<void(BST::Node *&)> print_node;
+    print_node = [&os, &print_node](BST::Node *&node)
+    {
+        os << *node << std::endl;
+        if (node->left != nullptr)
+        {
+            print_node(node->left);
+        }
+        if (node->right != nullptr)
+        {
+            print_node(node->right);
+        }
+    };
+
+    std::string stars(80, '*');
+    BST::Node *&root{bst.get_root()};
+    os << stars << std::endl;
+    if (root != nullptr)
+        print_node(root);
+    os << "binary search tree size:" << bst.length() << std::endl;
+    os << stars << std::endl;
+    return os;
 }
