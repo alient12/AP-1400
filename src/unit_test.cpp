@@ -458,24 +458,24 @@ TEST(HW3Test, TEST28) {
     EXPECT_EQ(test_value, move.get_root()->left->right->value);
 }
 
-// TEST(HW3Test, TEST29) {
-//     BST bst1{5, 1, 10, 2, 8, 50, 4, 60};
-//     BST bst2{3, 2, 100, 20, 8, 50, 4, 60, 44, 23};
-//     EXPECT_EQ((*bst1.find_successor(5))->value, 4);
-//     EXPECT_EQ(bst2.length(), 10);
-// }
+TEST(HW3Test, TEST29) {
+    BST bst1{5, 1, 10, 2, 8, 50, 4, 60};
+    BST bst2{3, 2, 100, 20, 8, 50, 4, 60, 44, 23};
+    EXPECT_EQ((*bst1.find_successor(5))->value, 4);
+    EXPECT_EQ(bst2.length(), 10);
+}
 
-// TEST(HW3Test, TEST30) {
-//     BST bst{5, 1, 10, 2, 8, 50, 4, 60};
-//     BST bst2{++bst};
+TEST(HW3Test, TEST30) {
+    BST bst{5, 1, 10, 2, 8, 50, 4, 60};
+    BST bst2{++bst};
 
-//     std::vector<int> values;
-//     EXPECT_EQ(bst.get_root()->value, 6);
-//     EXPECT_EQ(bst2.get_root()->value, 6);
-//     EXPECT_EQ(bst.get_root()->right->right->right->value, 61);
-//     EXPECT_EQ(bst2.get_root()->right->right->right->value, 61);
+    std::vector<int> values;
+    EXPECT_EQ(bst.get_root()->value, 6);
+    EXPECT_EQ(bst2.get_root()->value, 6);
+    EXPECT_EQ(bst.get_root()->right->right->right->value, 61);
+    EXPECT_EQ(bst2.get_root()->right->right->right->value, 61);
 
-// }
+}
 
 // TEST(HW3Test, TEST31) {
 //     BST bst1{5, 1, 10, 2, 8, 50, 4, 60};

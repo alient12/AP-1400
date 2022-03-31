@@ -416,3 +416,26 @@ BST BST::operator++(int)
     ++*this;
     return temp;
 }
+
+// BST::~BST()
+// {
+//     std::vector<Node*> nodes;
+//     bfs([&nodes](BST::Node*& node){nodes.push_back(node);});
+//     for(auto& node: nodes)
+//         delete node;
+// }
+
+BST::BST(std::initializer_list<int> args)
+{
+    for (int i: args) add_node(i);
+}
+
+// BST::BST(BST &bst)
+// {
+//     bst.bfs([this, &bst](BST::Node*& node){this->add_node(node->value);});
+// }
+
+// BST::BST(BST &&bst)
+// {
+//     root = bst.get_root();
+// }

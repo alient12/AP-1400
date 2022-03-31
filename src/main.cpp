@@ -4,24 +4,12 @@
 
 int main(int argc, char **argv)
 {
-    if (true) // make false to run unit-tests
+    if (false) // make false to run unit-tests
     {
         // debug section
-        BST bst{};
-        bst.add_node(25);
-        bst.add_node(10);
-        bst.add_node(50);
-        bst.add_node(65);
-        bst.add_node(60);
-        bst.add_node(70);
-        bst.add_node(5);
-        bst.add_node(2);
-        bst.add_node(7);
-        bst.add_node(75);
+        BST bst{25, 10, 50, 65, 60, 70, 5, 2, 7, 75};
         std::cout << bst;
         bst++;
-        std::cout << bst;
-        ++bst;
         std::cout << bst;
     }
     else

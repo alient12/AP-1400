@@ -6,6 +6,8 @@
 #include <compare>
 #include <iomanip>
 #include <string>
+#include <vector>
+#include <initializer_list>
 
 class BST
 {
@@ -27,8 +29,10 @@ public:
         Node* right;
     };
     BST() = default;
-    // BST(const BST &bst);
-    // BST(const BST &&bst);
+    // BST(BST &bst);
+    // BST(BST &&bst);
+    // ~BST();
+    BST(std::initializer_list<int> args);
     Node *&get_root();
     void bfs(std::function<void(Node*& node)> func);
     size_t length();
@@ -42,7 +46,7 @@ public:
     BST operator++(int);
 
 private:
-    Node* root;
+    Node* root{nullptr};
 };
 
 #endif //BST_H
