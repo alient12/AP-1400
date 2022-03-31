@@ -12,7 +12,7 @@ int main(int argc, char **argv)
         bst.add_node(12);
         bst.add_node(13);
         bst.add_node(9);
-        BST::Node* node = *bst.find_node(12);
+        BST::Node* node = *bst.find_parrent(12);
         std::cout << *node << std::endl;
         std::cout << *(node->right) << std::endl;
     }

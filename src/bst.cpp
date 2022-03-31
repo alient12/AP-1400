@@ -97,7 +97,6 @@ bool BST::add_node(int value)
         Node* node{new Node};
         node->value = value;
         root = node;
-        std::cout << "root " << value << std::endl;
         return true;
     }
 
@@ -122,7 +121,6 @@ bool BST::add_node(int value)
                 Node* node{new Node};
                 node->value = value;
                 parrent->right = node;
-                std::cout << "right " << value << std::endl;
                 return true;
             }
         }
@@ -139,9 +137,57 @@ bool BST::add_node(int value)
                 Node* node{new Node};
                 node->value = value;
                 parrent->left = node;
-                std::cout << "left " << value << std::endl;
                 return true;
             }
         }
     }
+}
+
+BST::Node** BST::find_parrent(int value)
+{
+    Node* root{this->get_root()};
+    if (root == nullptr) return nullptr;
+
+    Node*& parrent{root};
+    bool is_searching{true};
+    while(is_searching)
+    {
+        if (parrent->left != nullptr && parrent->left->value == value)
+        {
+            is_searching = false;
+            return &parrent;
+        }
+        if (parrent->right != nullptr && parrent->right->value == value)
+        {
+            is_searching = false;
+            return &parrent;
+        }
+
+        else if (parrent->value < value)
+        {
+            if (parrent->right != nullptr)
+            {
+                parrent = parrent->right;
+                continue;
+            }
+            else
+            {
+                is_searching = false;
+            }
+        }
+
+        else if (parrent->value > value)
+        {
+            if (parrent->left != nullptr)
+            {
+                parrent = parrent->left;
+                continue;
+            }
+            else
+            {
+                is_searching = false;
+            }
+        }
+    }
+    return nullptr;
 }
