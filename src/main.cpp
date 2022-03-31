@@ -8,20 +8,19 @@ int main(int argc, char **argv)
     {
         // debug section
         BST bst{};
+        bst.add_node(25);
         bst.add_node(10);
-        bst.add_node(12);
-        bst.add_node(13);
+        bst.add_node(50);
+        bst.add_node(65);
+        bst.add_node(60);
+        bst.add_node(70);
+        bst.add_node(5);
+        bst.add_node(2);
         bst.add_node(7);
-        bst.add_node(8);
-        bst.add_node(9);
-        // BST::Node** node = bst.find_parrent(9);
-        // std::cout << node << std::endl;
-        // std::cout << *(node->right) << std::endl;
-        // std::cout << "length: " << bst.length() << std::endl;
-        // std::cout << "10 successor: " << (*bst.find_successor(10))->value << std::endl;
-        // std::cout << bst;
-        // bst.delete_node(10);
-        // std::cout << bst;
+        bst.add_node(75);
+        std::cout << bst;
+        bst.delete_node(10);
+        std::cout << bst;
     }
     else
     {

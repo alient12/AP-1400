@@ -270,46 +270,101 @@ std::ostream& operator<<(std::ostream& os, BST& bst)
 
 bool BST::delete_node(int value)
 {
-    Node *old_node{*find_node(value)};
+    Node **old_node{find_node(value)};
     if (old_node == nullptr)
         return false;
 
-    Node *old_node_right{old_node->right};
-    Node *old_node_left{old_node->left};
+    Node **old_node_right{&((*old_node)->right)};
+    Node **old_node_left{&((*old_node)->left)};
 
-    Node *crown_node{*find_successor(value)};
-    Node *crown_node_right{crown_node->right};
-    Node *crown_node_left{crown_node->left};
-    std::cout << "Hi " << find_parrent(crown_node->value) << std::endl;
-    std::cout << *this << std::endl;
-    Node *crown_node_parrent{*find_parrent(crown_node->value)};
-    std::cout << "Hi" << std::endl;
-
-    // no leaf
-    if (crown_node_right == nullptr && crown_node_left == nullptr)
+    Node **crown_node{find_successor(value)};
+    if (crown_node == nullptr)
     {
-        old_node->value = crown_node->value;
-        delete crown_node;
+        // node has no leaf
+        if ((*old_node_right) == nullptr && (*old_node_left) == nullptr)
+        {
+            Node **old_node_parrent{find_parrent((*old_node)->value)};
+
+            // node is root and has no parrent
+            if (old_node_parrent == nullptr)
+            {
+                delete *old_node;
+                return true;
+            }
+
+            else
+            {
+                if ((*old_node_parrent)->value < (*old_node)->value)
+                    (*old_node_parrent)->right = nullptr;
+                else
+                    (*old_node_parrent)->left = nullptr;
+                delete (*old_node);
+                return true;
+            }
+        }
+
+        // node has right child
+        else
+        {
+            Node **old_node_parrent{find_parrent((*old_node)->value)};
+
+            // node is root and has no parrent
+            if (old_node_parrent == nullptr)
+            {
+                (*old_node)->value = (*old_node_right)->value;
+                (*old_node)->right = nullptr;
+                delete *old_node_right;
+                return true;
+            }
+            else
+            {
+                if ((*old_node_parrent)->value < (*old_node)->value)
+                    (*old_node_parrent)->right = (*old_node_right);
+                else
+                    (*old_node_parrent)->left = (*old_node_right);
+                (*old_node_right) = nullptr;
+                delete *old_node_right;
+                return true;
+            }
+        }
+    }
+
+
+
+    Node **crown_node_right{&((*crown_node)->right)};
+    Node **crown_node_left{&((*crown_node)->left)};
+    Node **crown_node_parrent{find_parrent((*crown_node)->value)};
+
+    // successor has no leaf
+    if ((*crown_node_right) == nullptr && (*crown_node_left) == nullptr)
+    {
+        (*old_node)->value = (*crown_node)->value;
+        if ((*crown_node_parrent)->value < (*crown_node)->value)
+            (*crown_node_parrent)->right = nullptr;
+        else
+            (*crown_node_parrent)->left = nullptr;
+        delete (*crown_node);
         return true;
     }
-    // two children
-    else if (crown_node_right != nullptr && crown_node_left != nullptr)
+    // successor has two children
+    else if ((*crown_node_right) != nullptr && (*crown_node_left) != nullptr)
     {
         std::cout << "not supported yet!" << std::endl;
         return false;
     }
-    //a child
+    //successor has a child
     else
     {
-        if (crown_node_right != nullptr)
+        std::cout << "a child" << std::endl;
+        if ((*crown_node_right) != nullptr)
         {
-            crown_node_parrent->right = crown_node_right;
+            (*crown_node_parrent)->right = (*crown_node_right);
         }
         else
         {
-            crown_node_parrent->left = crown_node_left;
+            (*crown_node_parrent)->left = (*crown_node_left);
         }
-        old_node->value = crown_node->value;
+        (*old_node)->value = (*crown_node)->value;
         delete crown_node;
         return true;
     }
