@@ -26,9 +26,19 @@ std::partial_ordering BST::Node::operator<=>(int num) const
     return this->value <=> num;
 }
 
+bool BST::Node::operator==(int num) const
+{
+    return this->value == num;
+}
+
 std::partial_ordering operator<=>(const int num, const BST::Node& node)
 {
-    return node.value <=> num;
+    return num <=> node.value;
+}
+
+bool operator==(const int num, const BST::Node& node)
+{
+    return node.value == num;
 }
 
 std::ostream& operator<<(std::ostream& os, const BST::Node& node)
