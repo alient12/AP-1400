@@ -382,3 +382,30 @@ bool BST::delete_node(int value)
         return true;
     }
 }
+
+void BST::bfs(std::function<void(Node*& node)> func)
+{
+    std::function<void(Node *&)> dfs;
+    dfs = [&func, &dfs](Node *&node)
+    {
+        func(node);
+        if (node->left != nullptr)
+        {
+            dfs(node->left);
+        }
+        if (node->right != nullptr)
+        {
+            dfs(node->right);
+        }
+    };
+
+    Node *&root{this->get_root()};
+    if (root != nullptr)
+        dfs(root);
+}
+
+BST &BST::operator++()
+{
+    this->bfs([](BST::Node*& node){(node->value)++;});
+    return *this;
+}

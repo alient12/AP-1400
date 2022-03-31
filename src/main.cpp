@@ -18,11 +18,7 @@ int main(int argc, char **argv)
         bst.add_node(2);
         bst.add_node(7);
         bst.add_node(75);
-        std::cout << bst;
-        bst.delete_node(10);
-        std::cout << bst;
-        std::cout << bst.get_root()->left->left->value << std::endl;
-        std::cout << bst.get_root()->left->right->value << std::endl;
+        bst.bfs([](BST::Node*& node){std::cout << node->value << std::endl;});
     }
     else
     {

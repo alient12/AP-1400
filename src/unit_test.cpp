@@ -104,23 +104,23 @@ TEST(HW3Test, TEST8) {
     EXPECT_EQ(bst.get_root()->right->right->value, 53);
 }
 
-// TEST(HW3Test, TEST9) {
-//     BST bst{};
-//     bst.add_node(25);
-//     bst.add_node(10);
-//     bst.add_node(50);
-//     bst.add_node(53);
+TEST(HW3Test, TEST9) {
+    BST bst{};
+    bst.add_node(25);
+    bst.add_node(10);
+    bst.add_node(50);
+    bst.add_node(53);
     
-//     EXPECT_FALSE(bst.add_node(50));
+    EXPECT_FALSE(bst.add_node(50));
 
-//     std::vector<int> values;
-//     bst.bfs([&values](BST::Node*& node){values.push_back(node->value);});
-//     EXPECT_EQ(values.size(), 4);
-//     EXPECT_TRUE(std::find(values.begin(), values.end(), 25) != values.end());
-//     EXPECT_TRUE(std::find(values.begin(), values.end(), 10) != values.end());
-//     EXPECT_TRUE(std::find(values.begin(), values.end(), 50) != values.end());
-//     EXPECT_TRUE(std::find(values.begin(), values.end(), 53) != values.end());
-// }
+    std::vector<int> values;
+    bst.bfs([&values](BST::Node*& node){values.push_back(node->value);});
+    EXPECT_EQ(values.size(), 4);
+    EXPECT_TRUE(std::find(values.begin(), values.end(), 25) != values.end());
+    EXPECT_TRUE(std::find(values.begin(), values.end(), 10) != values.end());
+    EXPECT_TRUE(std::find(values.begin(), values.end(), 50) != values.end());
+    EXPECT_TRUE(std::find(values.begin(), values.end(), 53) != values.end());
+}
 
 TEST(HW3Test, TEST10) {
     BST bst{};

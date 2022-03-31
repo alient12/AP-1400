@@ -38,6 +38,8 @@ public:
     Node** find_successor(int value);
     bool delete_node(int value);
     friend std::ostream &operator<<(std::ostream &os, BST &bst);
+    BST &operator++();
+    BST &operator++(int);
 
 private:
     Node* root;
