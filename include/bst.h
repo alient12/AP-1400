@@ -39,7 +39,7 @@ public:
     bool delete_node(int value);
     friend std::ostream &operator<<(std::ostream &os, BST &bst);
     BST &operator++();
-    BST &operator++(int);
+    BST operator++(int);
 
 private:
     Node* root;

@@ -4,7 +4,7 @@
 
 int main(int argc, char **argv)
 {
-    if (false) // make false to run unit-tests
+    if (true) // make false to run unit-tests
     {
         // debug section
         BST bst{};
@@ -18,7 +18,11 @@ int main(int argc, char **argv)
         bst.add_node(2);
         bst.add_node(7);
         bst.add_node(75);
-        bst.bfs([](BST::Node*& node){std::cout << node->value << std::endl;});
+        std::cout << bst;
+        bst++;
+        std::cout << bst;
+        ++bst;
+        std::cout << bst;
     }
     else
     {

@@ -409,3 +409,10 @@ BST &BST::operator++()
     this->bfs([](BST::Node*& node){(node->value)++;});
     return *this;
 }
+
+BST BST::operator++(int)
+{
+    BST temp = *this;
+    ++*this;
+    return temp;
+}
