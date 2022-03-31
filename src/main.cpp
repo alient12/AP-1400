@@ -4,7 +4,7 @@
 
 int main(int argc, char **argv)
 {
-    if (true) // make false to run unit-tests
+    if (false) // make false to run unit-tests
     {
         // debug section
         BST bst{};
@@ -21,6 +21,8 @@ int main(int argc, char **argv)
         std::cout << bst;
         bst.delete_node(10);
         std::cout << bst;
+        std::cout << bst.get_root()->left->left->value << std::endl;
+        std::cout << bst.get_root()->left->right->value << std::endl;
     }
     else
     {

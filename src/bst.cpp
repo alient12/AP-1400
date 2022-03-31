@@ -277,46 +277,47 @@ bool BST::delete_node(int value)
     Node **old_node_right{&((*old_node)->right)};
     Node **old_node_left{&((*old_node)->left)};
 
-    Node **crown_node{find_successor(value)};
-    if (crown_node == nullptr)
+    
+    // node has no leaf
+    if ((*old_node_right) == nullptr && (*old_node_left) == nullptr)
     {
-        // node has no leaf
-        if ((*old_node_right) == nullptr && (*old_node_left) == nullptr)
+        Node **old_node_parrent{find_parrent((*old_node)->value)};
+
+        // node is root and has no parrent
+        if (old_node_parrent == nullptr)
         {
-            Node **old_node_parrent{find_parrent((*old_node)->value)};
-
-            // node is root and has no parrent
-            if (old_node_parrent == nullptr)
-            {
-                delete *old_node;
-                return true;
-            }
-
-            else
-            {
-                if ((*old_node_parrent)->value < (*old_node)->value)
-                    (*old_node_parrent)->right = nullptr;
-                else
-                    (*old_node_parrent)->left = nullptr;
-                delete (*old_node);
-                return true;
-            }
+            delete *old_node;
+            return true;
         }
 
-        // node has right child
         else
         {
-            Node **old_node_parrent{find_parrent((*old_node)->value)};
-
-            // node is root and has no parrent
-            if (old_node_parrent == nullptr)
-            {
-                (*old_node)->value = (*old_node_right)->value;
-                (*old_node)->right = nullptr;
-                delete *old_node_right;
-                return true;
-            }
+            if ((*old_node_parrent)->value < (*old_node)->value)
+                (*old_node_parrent)->right = nullptr;
             else
+                (*old_node_parrent)->left = nullptr;
+            delete (*old_node);
+            return true;
+        }
+    }
+
+    // node has one child
+    else if (!((*old_node_right) != nullptr && (*old_node_left) != nullptr))
+    {
+        Node **old_node_parrent{find_parrent((*old_node)->value)};
+
+        // node is root and has no parrent
+        if (old_node_parrent == nullptr)
+        {
+            (*old_node)->value = (*old_node_right)->value;
+            (*old_node)->right = nullptr;
+            delete *old_node_right;
+            return true;
+        }
+        else
+        {
+            // node has right child
+            if ((*old_node_right) != nullptr)
             {
                 if ((*old_node_parrent)->value < (*old_node)->value)
                     (*old_node_parrent)->right = (*old_node_right);
@@ -326,10 +327,22 @@ bool BST::delete_node(int value)
                 delete *old_node_right;
                 return true;
             }
+            // node has left child
+            else
+            {
+                if ((*old_node_parrent)->value < (*old_node)->value)
+                    (*old_node_parrent)->right = (*old_node_left);
+                else
+                    (*old_node_parrent)->left = (*old_node_left);
+                (*old_node_left) = nullptr;
+                delete *old_node_left;
+                return true;
+            }
+            
         }
     }
 
-
+    Node **crown_node{find_successor(value)};
 
     Node **crown_node_right{&((*crown_node)->right)};
     Node **crown_node_left{&((*crown_node)->left)};
