@@ -23,7 +23,10 @@ public:
         Node* left;
         Node* right;
     };
-    Node*& get_root();
+    BST() = default;
+    // BST(const BST &bst);
+    // BST(const BST &&bst);
+    Node *&get_root();
     void bfs(std::function<void(Node*& node)> func);
     size_t length();
     bool add_node(int value);

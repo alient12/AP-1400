@@ -7,9 +7,14 @@ int main(int argc, char **argv)
     if (true) // make false to run unit-tests
     {
         // debug section
-        BST::Node node{};
-        node.value = 10;
-        std::cout << node << std::endl;
+        BST bst{};
+        bst.add_node(10);
+        bst.add_node(12);
+        bst.add_node(13);
+        bst.add_node(9);
+        BST::Node* node = *bst.find_node(12);
+        std::cout << *node << std::endl;
+        std::cout << *(node->right) << std::endl;
     }
     else
     {
