@@ -56,7 +56,7 @@ BST::Node*& BST::get_root()
 
 BST::Node** BST::find_node(int value)
 {
-    Node* root{this->get_root()};
+    Node*& root{this->get_root()};
     if (root == nullptr) return nullptr;
 
     Node*& parrent{root};
@@ -155,7 +155,7 @@ bool BST::add_node(int value)
 
 BST::Node** BST::find_parrent(int value)
 {
-    Node* root{this->get_root()};
+    Node*& root{this->get_root()};
     if (root == nullptr) return nullptr;
 
     Node*& parrent{root};
@@ -200,4 +200,27 @@ BST::Node** BST::find_parrent(int value)
         }
     }
     return nullptr;
+}
+
+size_t BST::length()
+{
+    size_t length{1};
+    std::function<void(BST::Node *&,size_t&)> add_children_num;
+    add_children_num = [&add_children_num](BST::Node *&node, size_t &len)
+    {
+        if (node->right != nullptr)
+        {
+            len++;
+            add_children_num(node->right, len);
+        }
+        if (node->left != nullptr)
+        {
+            len++;
+            add_children_num(node->left, len);
+        }
+    };
+    Node*& root{this->get_root()};
+    if (root == nullptr) return 0;
+    add_children_num(root, length);
+    return length;
 }
