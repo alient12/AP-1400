@@ -11,11 +11,15 @@ int main(int argc, char **argv)
         bst.add_node(10);
         bst.add_node(12);
         bst.add_node(13);
+        bst.add_node(7);
+        bst.add_node(8);
         bst.add_node(9);
         BST::Node* node = *bst.find_parrent(12);
         std::cout << *node << std::endl;
         std::cout << *(node->right) << std::endl;
         std::cout << "length: " << bst.length() << std::endl;
+        std::cout << "10 successor: " << (*bst.find_successor(10))->value << std::endl;
+
     }
     else
     {

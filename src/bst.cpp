@@ -224,3 +224,17 @@ size_t BST::length()
     add_children_num(root, length);
     return length;
 }
+
+BST::Node** BST::find_successor(int value)
+{
+    Node*& node{*find_node(value)};
+    if (node == nullptr || node->left == nullptr) return nullptr;
+    node = node->left;
+    while(true)
+    {
+        if (node->right != nullptr)
+            node = node->right;
+        else
+            return &node;
+    }
+}
