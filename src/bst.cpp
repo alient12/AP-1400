@@ -230,15 +230,15 @@ size_t BST::length()
 
 BST::Node** BST::find_successor(int value)
 {
-    Node*& node{*find_node(value)};
-    if (node == nullptr || node->left == nullptr) return nullptr;
-    node = node->left;
+    Node** node{find_node(value)};
+    if (node == nullptr || (*node)->left == nullptr) return nullptr;
+    node = &((*node)->left);
     while(true)
     {
-        if (node->right != nullptr)
-            node = node->right;
+        if ((*node)->right != nullptr)
+            node = &((*node)->right);
         else
-            return &node;
+            return node;
     }
 }
 
@@ -281,6 +281,7 @@ bool BST::delete_node(int value)
     Node *crown_node_right{crown_node->right};
     Node *crown_node_left{crown_node->left};
     std::cout << "Hi " << find_parrent(crown_node->value) << std::endl;
+    std::cout << *this << std::endl;
     Node *crown_node_parrent{*find_parrent(crown_node->value)};
     std::cout << "Hi" << std::endl;
 
