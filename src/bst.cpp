@@ -60,21 +60,21 @@ BST::Node** BST::find_node(int value)
     Node*& root{this->get_root()};
     if (root == nullptr) return nullptr;
 
-    Node*& parrent{root};
+    Node** parrent{&root};
     bool is_searching{true};
     while(is_searching)
     {
-        if (parrent->value == value)
+        if ((*parrent)->value == value)
         {
             is_searching = false;
-            return &parrent;
+            return parrent;
         }
 
-        else if (parrent->value < value)
+        else if ((*parrent)->value < value)
         {
-            if (parrent->right != nullptr)
+            if ((*parrent)->right != nullptr)
             {
-                parrent = parrent->right;
+                parrent = &((*parrent)->right);
                 continue;
             }
             else
@@ -83,11 +83,11 @@ BST::Node** BST::find_node(int value)
             }
         }
 
-        else if (parrent->value > value)
+        else if ((*parrent)->value > value)
         {
-            if (parrent->left != nullptr)
+            if ((*parrent)->left != nullptr)
             {
-                parrent = parrent->left;
+                parrent = &((*parrent)->left);
                 continue;
             }
             else
@@ -159,26 +159,28 @@ BST::Node** BST::find_parrent(int value)
     Node*& root{this->get_root()};
     if (root == nullptr) return nullptr;
 
-    Node*& parrent{root};
+    if (root->value == value) return nullptr;
+
+    Node** parrent{&root};
     bool is_searching{true};
     while(is_searching)
     {
-        if (parrent->left != nullptr && parrent->left->value == value)
+        if ((*parrent)->left != nullptr && (*parrent)->left->value == value)
         {
             is_searching = false;
-            return &parrent;
+            return parrent;
         }
-        if (parrent->right != nullptr && parrent->right->value == value)
+        if ((*parrent)->right != nullptr && (*parrent)->right->value == value)
         {
             is_searching = false;
-            return &parrent;
+            return parrent;
         }
 
-        else if (parrent->value < value)
+        else if ((*parrent)->value < value)
         {
-            if (parrent->right != nullptr)
+            if ((*parrent)->right != nullptr)
             {
-                parrent = parrent->right;
+                parrent = &((*parrent)->right);
                 continue;
             }
             else
@@ -187,11 +189,11 @@ BST::Node** BST::find_parrent(int value)
             }
         }
 
-        else if (parrent->value > value)
+        else if ((*parrent)->value > value)
         {
-            if (parrent->left != nullptr)
+            if ((*parrent)->left != nullptr)
             {
-                parrent = parrent->left;
+                parrent = &((*parrent)->left);
                 continue;
             }
             else
@@ -264,4 +266,50 @@ std::ostream& operator<<(std::ostream& os, BST& bst)
     os << "binary search tree size:" << bst.length() << std::endl;
     os << stars << std::endl;
     return os;
+}
+
+bool BST::delete_node(int value)
+{
+    Node *old_node{*find_node(value)};
+    if (old_node == nullptr)
+        return false;
+
+    Node *old_node_right{old_node->right};
+    Node *old_node_left{old_node->left};
+
+    Node *crown_node{*find_successor(value)};
+    Node *crown_node_right{crown_node->right};
+    Node *crown_node_left{crown_node->left};
+    std::cout << "Hi " << find_parrent(crown_node->value) << std::endl;
+    Node *crown_node_parrent{*find_parrent(crown_node->value)};
+    std::cout << "Hi" << std::endl;
+
+    // no leaf
+    if (crown_node_right == nullptr && crown_node_left == nullptr)
+    {
+        old_node->value = crown_node->value;
+        delete crown_node;
+        return true;
+    }
+    // two children
+    else if (crown_node_right != nullptr && crown_node_left != nullptr)
+    {
+        std::cout << "not supported yet!" << std::endl;
+        return false;
+    }
+    //a child
+    else
+    {
+        if (crown_node_right != nullptr)
+        {
+            crown_node_parrent->right = crown_node_right;
+        }
+        else
+        {
+            crown_node_parrent->left = crown_node_left;
+        }
+        old_node->value = crown_node->value;
+        delete crown_node;
+        return true;
+    }
 }
