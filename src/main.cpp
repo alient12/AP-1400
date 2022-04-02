@@ -4,13 +4,32 @@
 
 int main(int argc, char **argv)
 {
-    if (false) // make false to run unit-tests
+    if (true) // make false to run unit-tests
     {
         // debug section
-        BST bst{25, 10, 50, 65, 60, 70, 5, 2, 7, 75};
-        std::cout << bst;
-        bst++;
-        std::cout << bst;
+        {
+            BST bst{};
+            bst.add_node(25);
+            bst.add_node(10);
+            bst.add_node(50);
+            bst.add_node(65);
+            bst.add_node(5);
+            bst.add_node(20);
+            bst.add_node(22);
+            
+            int test_value{bst.get_root()->left->right->value};
+            BST::Node* adddress_of_root{*bst.find_node(25)};
+
+            BST move{};
+            move = std::move(bst);
+        }
+        //destructor is broken for move constructed instance!!!  
+
+        //
+        // BST bst1{5, 1, 10, 2, 8, 50, 4, 60};
+        // BST bst2{3, 2, 100, 20, 8, 50, 4, 60, 44, 23};
+        // std::cout << (*bst1.find_successor(5))->value << std::endl;
+        // std::cout << bst2.length() << std::endl;
     }
     else
     {

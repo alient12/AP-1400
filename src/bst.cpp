@@ -417,25 +417,60 @@ BST BST::operator++(int)
     return temp;
 }
 
-// BST::~BST()
-// {
-//     std::vector<Node*> nodes;
-//     bfs([&nodes](BST::Node*& node){nodes.push_back(node);});
-//     for(auto& node: nodes)
-//         delete node;
-// }
-
-BST::BST(std::initializer_list<int> args)
+BST::BST(std::initializer_list<int> args):root(nullptr)
 {
-    for (int i: args) add_node(i);
+    for (int i: args) 
+    {
+        add_node(i);
+    }
 }
 
-// BST::BST(BST &bst)
-// {
-//     bst.bfs([this, &bst](BST::Node*& node){this->add_node(node->value);});
-// }
+BST::BST(BST &bst)
+{
+    bst.bfs([this](BST::Node*& node){this->add_node(node->value);});
+}
 
-// BST::BST(BST &&bst)
-// {
-//     root = bst.get_root();
-// }
+BST::BST(BST &&bst)
+{
+    root = bst.get_root();
+    bst.get_root() = nullptr;
+}
+
+BST::~BST()
+{
+    std::cout << "BST destructor" << std::endl;
+    std::vector<Node*> nodes;
+    bfs([&nodes](BST::Node*& node){nodes.push_back(node);});
+    // std::cout << nodes.size() << std::endl;
+    for(auto& node: nodes)
+        delete node;
+}
+
+BST &BST::operator=(BST &bst)
+{
+    Node *&root{bst.get_root()};
+    if (root == this->get_root())
+        return *this;
+    std::vector<Node*> nodes;
+    bfs([&nodes](BST::Node*& node){nodes.push_back(node);});
+    for(auto& node: nodes)
+        delete node;
+    
+    std::function<void(Node *&)> dfs;
+    dfs = [this, &dfs](Node *&node)
+    {
+        this->add_node(node->value);
+        if (node->left != nullptr)
+        {
+            dfs(node->left);
+        }
+        if (node->right != nullptr)
+        {
+            dfs(node->right);
+        }
+    };
+
+    if (root != nullptr)
+        dfs(root);
+    return *this;
+}

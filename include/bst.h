@@ -29,9 +29,9 @@ public:
         Node* right;
     };
     BST() = default;
-    // BST(BST &bst);
-    // BST(BST &&bst);
-    // ~BST();
+    BST(BST &bst);
+    BST(BST &&bst);
+    ~BST();
     BST(std::initializer_list<int> args);
     Node *&get_root();
     void bfs(std::function<void(Node*& node)> func);
@@ -44,6 +44,8 @@ public:
     friend std::ostream &operator<<(std::ostream &os, BST &bst);
     BST &operator++();
     BST operator++(int);
+    BST &operator=(BST &&bst) = default;
+    BST &operator=(BST &bst);
 
 private:
     Node* root{nullptr};
