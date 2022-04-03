@@ -44,7 +44,7 @@ public:
     friend std::ostream &operator<<(std::ostream &os, BST &bst);
     BST &operator++();
     BST operator++(int);
-    BST &operator=(BST &&bst) = default;
+    BST &operator=(BST &&bst);
     BST &operator=(BST &bst);
 
 private:

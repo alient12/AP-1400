@@ -438,12 +438,17 @@ BST::BST(BST &&bst)
 
 BST::~BST()
 {
-    std::cout << "BST destructor" << std::endl;
     std::vector<Node*> nodes;
     bfs([&nodes](BST::Node*& node){nodes.push_back(node);});
-    // std::cout << nodes.size() << std::endl;
     for(auto& node: nodes)
         delete node;
+}
+
+BST &BST::operator=(BST &&bst)
+{
+    root = bst.get_root();
+    bst.get_root() = nullptr;
+    return *this;
 }
 
 BST &BST::operator=(BST &bst)
