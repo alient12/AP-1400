@@ -78,9 +78,7 @@ BST::Node** BST::find_node(int value)
                 continue;
             }
             else
-            {
                 is_searching = false;
-            }
         }
 
         else if ((*parrent)->value > value)
@@ -91,9 +89,7 @@ BST::Node** BST::find_node(int value)
                 continue;
             }
             else
-            {
                 is_searching = false;
-            }
         }
     }
     return nullptr;
@@ -116,9 +112,7 @@ bool BST::add_node(int value)
     while(true)
     {
         if (parrent->value == value)
-        {
             return false;
-        }
 
         else if (parrent->value < value)
         {
@@ -184,9 +178,7 @@ BST::Node** BST::find_parrent(int value)
                 continue;
             }
             else
-            {
                 is_searching = false;
-            }
         }
 
         else if ((*parrent)->value > value)
@@ -197,9 +189,7 @@ BST::Node** BST::find_parrent(int value)
                 continue;
             }
             else
-            {
                 is_searching = false;
-            }
         }
     }
     return nullptr;
@@ -249,13 +239,9 @@ std::ostream& operator<<(std::ostream& os, BST& bst)
     {
         os << *node << std::endl;
         if (node->left != nullptr)
-        {
             print_node(node->left);
-        }
         if (node->right != nullptr)
-        {
             print_node(node->right);
-        }
     };
 
     std::string stars(80, '*');
@@ -370,13 +356,9 @@ bool BST::delete_node(int value)
     {
         std::cout << "a child" << std::endl;
         if ((*crown_node_right) != nullptr)
-        {
             (*crown_node_parrent)->right = (*crown_node_right);
-        }
         else
-        {
             (*crown_node_parrent)->left = (*crown_node_left);
-        }
         (*old_node)->value = (*crown_node)->value;
         delete crown_node;
         return true;
@@ -390,13 +372,9 @@ void BST::bfs(std::function<void(Node*& node)> func)
     {
         func(node);
         if (node->left != nullptr)
-        {
             dfs(node->left);
-        }
         if (node->right != nullptr)
-        {
             dfs(node->right);
-        }
     };
 
     Node *&root{this->get_root()};
@@ -420,9 +398,7 @@ BST BST::operator++(int)
 BST::BST(std::initializer_list<int> args):root(nullptr)
 {
     for (int i: args) 
-    {
         add_node(i);
-    }
 }
 
 BST::BST(BST &bst)
@@ -466,13 +442,9 @@ BST &BST::operator=(BST &bst)
     {
         this->add_node(node->value);
         if (node->left != nullptr)
-        {
             dfs(node->left);
-        }
         if (node->right != nullptr)
-        {
             dfs(node->right);
-        }
     };
 
     if (root != nullptr)
