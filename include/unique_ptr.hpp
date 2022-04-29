@@ -12,12 +12,6 @@ UniquePtr<T>::UniquePtr()
     _p = nullptr;
 }
 
-// template <typename T>
-// UniquePtr<T>::UniquePtr(std::initializer_list<std::make_unique<T>> p)
-// {
-//     _p = p;
-// }
-
 template <typename T>
 UniquePtr<T>::~UniquePtr()
 {
@@ -75,4 +69,10 @@ template <typename T>
 UniquePtr<T>::operator bool() const
 {
     return _p != nullptr;
+}
+
+template <typename T>
+UniquePtr<T> make_unique(T t)
+{
+    return UniquePtr<T>(new T {t});
 }

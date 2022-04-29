@@ -8,7 +8,6 @@ class UniquePtr
 public:
     UniquePtr(T *p);
     UniquePtr();
-    // UniquePtr(std::initializer_list<std::make_unique<T>> p);
     ~UniquePtr();
     UniquePtr(const UniquePtr &) = delete;
     UniquePtr &operator=(const UniquePtr &) = delete;
