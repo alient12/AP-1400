@@ -70,3 +70,9 @@ T* UniquePtr<T>::release()
     _p = nullptr;
     return tmp;
 }
+
+template <typename T>
+UniquePtr<T>::operator bool() const
+{
+    return _p != nullptr;
+}

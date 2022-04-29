@@ -19,6 +19,7 @@ public:
     void reset();
     void reset(T *p);
     T *release();
+    explicit operator bool() const;
 
 private:
     T *_p;
