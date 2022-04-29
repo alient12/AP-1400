@@ -1,12 +1,17 @@
 #include <iostream>
 #include <gtest/gtest.h>
+#include "unique_ptr.h"
+#include "shared_ptr.h"
 
 
 int main(int argc, char **argv)
 {
     if (true) // make false to run unit-tests
     {
-        // debug section 
+        // debug section
+        UniquePtr<int> ptr{new int{10}};
+        std::cout << ptr.get() << std::endl;
+        std::cout << *ptr << std::endl;
         
     }
     else
