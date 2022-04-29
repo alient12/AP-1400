@@ -2,7 +2,6 @@
 #include <gtest/gtest.h>
 #include "unique_ptr.h"
 #include "shared_ptr.h"
-#include <typeinfo>
 
 
 int main(int argc, char **argv)
@@ -10,11 +9,10 @@ int main(int argc, char **argv)
     if (false) // make false to run unit-tests
     {
         // debug section
-        // std::cout << typeid(std::make_unique<int>(10)).name() << std::endl;
-        UniquePtr<int> ptr{make_unique<int>(10)};
-        // UniquePtr<int> ptr{new int (10)};
-        std::cout << ptr.get() << std::endl;
-        std::cout << *ptr << std::endl;
+        SharedPtr<int> ptr{new int (10)};
+        SharedPtr<int> ptr_copy{ptr};
+        // std::cout << ptr.get() << std::endl;
+        // std::cout << *ptr << std::endl;
         
     }
     else
