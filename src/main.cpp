@@ -11,12 +11,7 @@ int main(int argc, char **argv)
     if (false) // make false to run unit-tests
     {
         // debug section
-        Cappuccino cappuccino;
-        cappuccino.add_side_item(new Water{1});
-        Cappuccino equal;
-        equal.add_side_item(new Sugar{1});
-        equal = equal;
-        std::cout << cappuccino.price() << " " << equal.price() << std::endl;
+        std::cout << "Running unit tests..." << std::endl;
     }
     else
     {
