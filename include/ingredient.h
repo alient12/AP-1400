@@ -1,6 +1,8 @@
 #ifndef INGREDIENT_H
 #define INGREDIENT_H
 
+#include <string>
+
 class Ingredient
 {
 public:
