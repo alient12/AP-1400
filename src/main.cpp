@@ -11,10 +11,12 @@ int main(int argc, char **argv)
     if (false) // make false to run unit-tests
     {
         // debug section
-        Cinnamon cinnamon{2};
-        Chocolate chocolate{1};
-        std::cout << chocolate.get_name() << std::endl;
-        
+        Cappuccino cappuccino;
+        cappuccino.add_side_item(new Water{1});
+        Cappuccino equal;
+        equal.add_side_item(new Sugar{1});
+        equal = equal;
+        std::cout << cappuccino.price() << " " << equal.price() << std::endl;
     }
     else
     {

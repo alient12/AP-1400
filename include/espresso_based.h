@@ -5,6 +5,7 @@
 #include "sub_ingredients.h"
 #include <vector>
 #include <string>
+#include <iostream>
 
 class EspressoBased
 {
@@ -15,12 +16,12 @@ public:
     void brew();
     std::vector<Ingredient*>& get_ingredients(){return ingredients;};
 
-    ~EspressoBased();
+    virtual ~EspressoBased();
 
 protected:
     EspressoBased() = default;
     EspressoBased(const EspressoBased& esp);
-    void operator=(const EspressoBased& esp);
+    virtual void operator=(const EspressoBased& esp);
 
     std::vector<Ingredient*> ingredients;
     std::string name;

@@ -6,6 +6,7 @@
 #include "ingredient.h"
 #include <vector>
 #include <string>
+#include <iostream>
 
 
 class Cappuccino: public EspressoBased
@@ -13,8 +14,8 @@ class Cappuccino: public EspressoBased
 public:
     Cappuccino();
     Cappuccino(const Cappuccino& cap);
-	~Cappuccino();
-    void operator=(const Cappuccino& cap);
+	virtual ~Cappuccino();
+    virtual void operator=(const Cappuccino& cap);
 
     virtual std::string get_name();
     virtual double price();

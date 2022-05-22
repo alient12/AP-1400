@@ -60,38 +60,38 @@ TEST(HW5Test, TEST5) {
     EXPECT_DOUBLE_EQ(cappuccino.price(), 60);
 }
 
-// TEST(HW5Test, TEST6) {
-//     EspressoBased* esp{new Cappuccino{}};
-//     reinterpret_cast<Cappuccino*>(esp)->add_side_item(new Cookie{1});
-//     std::vector<Ingredient*>& sides = reinterpret_cast<Cappuccino*>(esp)->get_side_items();
-//     EXPECT_EQ(sides.size(), 1);
-//     delete esp;
-//     EXPECT_EQ(sides.size(), 0);
-// }
+TEST(HW5Test, TEST6) {
+    EspressoBased* esp{new Cappuccino{}};
+    reinterpret_cast<Cappuccino*>(esp)->add_side_item(new Cookie{1});
+    std::vector<Ingredient*>& sides = reinterpret_cast<Cappuccino*>(esp)->get_side_items();
+    EXPECT_EQ(sides.size(), 1);
+    delete esp;
+    EXPECT_EQ(sides.size(), 0);
+}
 
-// TEST(HW5Test, TEST7) {
-//     Cappuccino cappuccino;
-//     cappuccino.add_side_item(new Chocolate{2});
-//     Cappuccino copy{cappuccino};
-//     EXPECT_EQ(copy.get_name(), "Cappuccino");
-//     EXPECT_DOUBLE_EQ(copy.price(), 65);
-// }
+TEST(HW5Test, TEST7) {
+    Cappuccino cappuccino;
+    cappuccino.add_side_item(new Chocolate{2});
+    Cappuccino copy{cappuccino};
+    EXPECT_EQ(copy.get_name(), "Cappuccino");
+    EXPECT_DOUBLE_EQ(copy.price(), 65);
+}
 
-// TEST(HW5Test, TEST8) {
-//     Cappuccino cappuccino;
-//     cappuccino.add_side_item(new Water{1});
-//     Cappuccino equal;
-//     equal.add_side_item(new Sugar{1});
-//     equal = cappuccino;
-//     EXPECT_EQ(equal.price(), 56);
-// }
+TEST(HW5Test, TEST8) {
+    Cappuccino cappuccino;
+    cappuccino.add_side_item(new Water{1});
+    Cappuccino equal;
+    equal.add_side_item(new Sugar{1});
+    equal = cappuccino;
+    EXPECT_EQ(equal.price(), 56);
+}
 
-// TEST(HW5Test, TEST9) {
-//     Cappuccino equal;
-//     equal.add_side_item(new Sugar{2});
-//     equal = equal;
-//     EXPECT_EQ(equal.price(), 57);
-// }
+TEST(HW5Test, TEST9) {
+    Cappuccino equal;
+    equal.add_side_item(new Sugar{2});
+    equal = equal;
+    EXPECT_EQ(equal.price(), 57);
+}
 
 // TEST(HW5Test, TEST10) {
 //     Mocha mocha{};
