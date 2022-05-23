@@ -85,50 +85,75 @@ void EspressoBased::brew()
     using namespace std::chrono_literals;
 
     std::string reset_position;
-    for (float percentage = 0.0f; percentage <= 1.0f; percentage += 0.02f) {
-        std::string data_downloaded =
-            std::to_string(int(percentage * 100)) + "/100";
-        auto document = hbox({
-            text("Brewing:"),
-            gauge(percentage) | flex,
-            text(" " + data_downloaded),
-        });
-        auto screen = Screen(100, 1);
-        Render(screen, document);
-        std::cout << reset_position;
-        screen.Print();
-        reset_position = screen.ResetPosition();
-
-        std::this_thread::sleep_for(0.01s);
-    }
-    std::cout << std::endl;
-    
-    
-    int red = 0;
-    int green = 0;
-    int blue = 100;
-    auto slider_red = Slider("Red  :", &red, 0, 255, 1);
-    auto slider_green = Slider("Green:", &green, 0, 255, 1);
-    auto slider_blue = Slider("Blue :", &blue, 0, 255, 1);
-    
-    auto container = Container::Vertical({
-
-    });
-    
-    auto renderer = Renderer(container, [&] {
-        return hbox({
-                separatorEmpty(),
-                separatorHeavy(),
+    if (this->get_name() == "Cappuccino")
+    {
+        for (float percentage = 0.0f; percentage <= 1.01f; percentage += 0.01f)
+        {
+            std::string data_downloaded = std::to_string(int(percentage * 100)) + "/100";
+            auto document =  //
                 vbox({
-                    ColorTile(red, green, blue) | size(HEIGHT, LESS_THAN, 1),
-                    ColorTile(red + 100, green, blue) | size(HEIGHT, LESS_THAN, 4),
-                }) | xflex,
-            }) |
-            border | size(WIDTH, LESS_THAN, 15) | size(HEIGHT, GREATER_THAN, 8);
-    });
-    auto screen = ScreenInteractive::TerminalOutput();
-    screen.Loop(renderer);
+                    hbox({
+                        text("Brewing:"),
+                        gauge(percentage),
+                        text(" " + data_downloaded),
+                    }) | border,
+            
+                    hbox({
+                        separatorEmpty(),
+                        separatorHeavy(),
+                        vbox({
+                        ColorTile(102, 255, 102) | size(HEIGHT, LESS_THAN, int(1.0f * percentage)),
+                        ColorTile(204, 0, 204) | size(HEIGHT, LESS_THAN, int(1.0f * percentage)),
+                        ColorTile(255, 255, 255) | size(HEIGHT, LESS_THAN, int(4.0f * percentage)),
+                        ColorTile(102, 51, 0) | size(HEIGHT, LESS_THAN, int(4.0f * percentage)),
+                        }) ,
+                        
+                    }) | border | size(WIDTH, LESS_THAN, 15) | size(HEIGHT, GREATER_THAN, 12),
+                });
+            auto screen = Screen::Create(Dimension::Full(), Dimension::Fit(document));
+            // auto screen = Screen(100, 1);
+            Render(screen, document);
+            std::cout << reset_position;
+            screen.Print();
+            reset_position = screen.ResetPosition();
+            std::this_thread::sleep_for(0.02s);
+        }
+    }
+    else if (this->get_name() == "Mocha")
+    {
+        for (float percentage = 0.0f; percentage <= 1.01f; percentage += 0.01f)
+        {
+            std::string data_downloaded = std::to_string(int(percentage * 100)) + "/100";
+            auto document =  //
+                vbox({
+                    hbox({
+                        text("Brewing:"),
+                        gauge(percentage),
+                        text(" " + data_downloaded),
+                    }) | border,
+            
+                    hbox({
+                        separatorEmpty(),
+                        separatorHeavy(),
+                        vbox({
+                        ColorTile(204, 0, 204) | size(HEIGHT, LESS_THAN, int(2.0f * percentage)),
+                        ColorTile(255, 255, 255) | size(HEIGHT, LESS_THAN, int(4.0f * percentage)),
+                        ColorTile(102, 51, 0) | size(HEIGHT, LESS_THAN, int(4.0f * percentage)),
+                        }) ,
+                        
+                    }) | border | size(WIDTH, LESS_THAN, 15) | size(HEIGHT, GREATER_THAN, 12),
+                });
+            auto screen = Screen::Create(Dimension::Full(), Dimension::Fit(document));
+            // auto screen = Screen(100, 1);
+            Render(screen, document);
+            std::cout << reset_position;
+            screen.Print();
+            reset_position = screen.ResetPosition();
+            std::this_thread::sleep_for(0.02s);
+        }
+    }
     
+    std::cout << std::endl; 
 }
 
 void EspressoBased::coffie_maker()
