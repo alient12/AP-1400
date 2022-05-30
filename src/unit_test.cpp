@@ -66,18 +66,18 @@ TEST(HW6Test, TEST6) {
     EXPECT_EQ(patients[58].name, "Joan Crawford");
 }
 
-// TEST(HW6Test, TEST7) {
-//     auto flights = q3::gather_flights("flights.txt");
+TEST(HW6Test, TEST7) {
+    auto flights = q3::gather_flights("flights.txt");
 
-//     std::vector<std::string> flight_numbers;
-//     while (!flights.empty()) 
-//     {
-//         flight_numbers.push_back(flights.top().flight_number);
-//         flights.pop();
-//     }
-//     std::vector<std::string> correct{"9725", "QR720", "MA127", "9724", "QR492", "GH758"};
-//     EXPECT_EQ(flight_numbers, correct);
-// }
+    std::vector<std::string> flight_numbers;
+    while (!flights.empty()) 
+    {
+        flight_numbers.push_back(flights.top().flight_number);
+        flights.pop();
+    }
+    std::vector<std::string> correct{"9725", "QR720", "MA127", "9724", "QR492", "GH758"};
+    EXPECT_EQ(flight_numbers, correct);
+}
 
 // TEST(HW6Test, TEST8) {
 //     std::vector<q4::Sensor> sensors{{{0, 0.01}, 0.5},
