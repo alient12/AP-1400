@@ -11,7 +11,8 @@ int main(int argc, char **argv)
     if (false) // make false to run unit-tests
     {
         // debug section
-
+        std::vector<q2::Patient> patients = q2::read_file("lung_cancer.csv");
+        std::cout << "Patients: " << patients.size() << std::endl;
     }
     else
     {
