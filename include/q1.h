@@ -20,5 +20,17 @@ namespace q1
         }
         return x;
     }
+
+    template<typename T, typename Func>
+    inline T gradient_descent(T initial_value, double step_size)
+    {
+        T x = initial_value;
+        Func f = Func();
+        while (std::abs(gradient(f, x)) > 0.001)
+        {
+            x -= step_size * gradient(f, x);
+        }
+        return x;
+    }
 }
 #endif //Q1_H

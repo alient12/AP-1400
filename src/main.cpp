@@ -5,23 +5,13 @@
 #include "q2.h"
 #include "q3.h"
 #include "q4.h"
+#include<cmath>
 
 int main(int argc, char **argv)
 {
     if (false) // make false to run unit-tests
     {
         // debug section
-        auto flights = q3::gather_flights("flights.txt");
-        std::vector<std::string> flight_numbers;
-        while (!flights.empty()) 
-        {
-            flight_numbers.push_back(flights.top().flight_number);
-            flights.pop();
-        }
-        for (auto flight_number : flight_numbers)
-        {
-            std::cout << flight_number << std::endl;
-        }
     }
     else
     {
