@@ -1,13 +1,24 @@
 #ifndef Q4_H
 #define Q4_H
 
+#include <numeric>
+
 namespace q4
 {
     struct Vector2D
     {
-    double x{};
-    double y{}; 
+        double x{};
+        double y{};
+        Vector2D operator+(const Vector2D& rhs) const
+        {
+            return {x + rhs.x, y + rhs.y};
+        };
+        Vector2D operator*(double rhs) const
+        {
+            return {x * rhs, y * rhs};
+        };
     };
+
 
     struct Sensor
     {
@@ -15,18 +26,22 @@ namespace q4
         double accuracy;    
     };
 
-    // inline Vector2D kalman_filter(std::vector<Sensor> sensors)
-    // {
-    //     double x_k{};
-    //     double p_k{};
-    //     for (auto sensor : sensors)
-    //     {
-    //         double p_k_1{p_k + sensor.accuracy};
-    //         double k{p_k_1 / (p_k_1 + sensor.accuracy)};
-    //         x_k = x_k + k * (sensor.pos.x - x_k);
-    //         p_k = (1 - k) * p_k_1;
-    //     }
-    // }
+    inline Vector2D kalman_filter(std::vector<Sensor> sensors)
+    {
+        Vector2D avg{0, 0};
+        auto sensor_sum = std::accumulate(
+            sensors.begin(), sensors.end(), Sensor{{0, 0}, 0}, 
+            [] (Sensor old, Sensor s)
+            {
+                double acc = old.accuracy + s.accuracy;
+                Sensor result{old.pos + s.pos * s.accuracy, acc};
+                return result;
+            });
+
+        avg.x = sensor_sum.pos.x / sensor_sum.accuracy;
+        avg.y = sensor_sum.pos.y / sensor_sum.accuracy;
+        return avg;
+    }
 }
 
 

@@ -5,7 +5,6 @@
 #include "q2.h"
 #include "q3.h"
 #include "q4.h"
-#include<cmath>
 
 int main(int argc, char **argv)
 {
